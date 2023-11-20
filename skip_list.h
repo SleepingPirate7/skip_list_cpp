@@ -39,6 +39,13 @@ class SkipList {
     header_ = new Node<KeyT, ValueT>(KeyT(), ValueT(), KMaxLevel);
   }
   ~SkipList() {
+    auto curr = header_;
+    curr = curr->next_[0];
+    while (curr != nullptr) {
+      auto prev = curr;
+      curr = curr->next_[0];
+      delete prev;
+    }
     delete header_;
   }
   SkipList(const SkipList &) = delete;
